@@ -1,5 +1,7 @@
 #The second part of the code isn't working currently. But i'm in progress to fix this issue:)
-#first part: getting html page
+
+#first part: getting html code of the page
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -8,13 +10,16 @@ htmlpage = requests.get("https://rabota.by/search/vacancy?area=1002&fromSearchLi
 
 soup = BeautifulSoup(htmlpage.text, 'html.parser')
 
-#second part
+#second part: extracting links of vacancies
+
 def getLinks(url):
-    html_page = urllib2.urlopen("https://rabota.by/search/vacancy?area=1002&fromSearchLine=true&st=searchVacancy&text=python&page=0", headers=headers)
+    html_page = urllib2.urlopen(url)
     soup = BeautifulSoup(html_page)
     links = []
 
     for link in soup.findAll('a', attrs={'href': re.compile(f"query={'python'}$")}):
         links.append(link.get('href'))
+                                                            
+    return links
 
-print(links)
+print( getLinks("https://rabota.by/search/vacancy?area=1002&fromSearchLine=true&st=searchVacancy&text=python&page=0") )
