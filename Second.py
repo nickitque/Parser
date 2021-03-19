@@ -1,4 +1,4 @@
-#count words "python"
+#count number of word "python" in default page
 
 import requests
 from bs4 import BeautifulSoup
