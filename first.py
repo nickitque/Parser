@@ -14,12 +14,13 @@ soup = BeautifulSoup(htmlpage.text, 'html.parser')
 
 #second part: extracting links of vacancies
 
+key_word = "python"
 def getLinks(url):
     html_page = urllib2.urlopen(url)
     soup = BeautifulSoup(html_page)
     links = []
 
-    for link in soup.findAll('a', attrs={'href': re.compile(f"query={'python'}$")}):
+    for link in soup.findAll('a', attrs={'href': re.compile(f"query={key_word}$")}):
         links.append(link.get('href'))
                                                             
     return links
